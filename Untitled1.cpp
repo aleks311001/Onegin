@@ -7,21 +7,34 @@
 
 using namespace std;
 
-void ReadOnegin(string Onegin[], int j);
+void ReadOnegin (string Onegin[], int j);
 int StrSr (const void * s1, const void * s2);
 
 int main ()
     {
     setlocale( LC_ALL,"Russian" );
     string Onegin[14][N];
+
     for (int i = 0; i < 14; i++)
         {
         ReadOnegin (Onegin[i], i);
         }
+
     for (int j = 0; j < 14; j++)
         {
         qsort (Onegin[j], N, sizeof(string), StrSr);
         }
+
+    FILE * text = fopen ("Evgeniy-Onegin-Переставленный.txt", "w");
+    for (int i = 0; i < 14; i++)
+        {
+        for (int j = 0; j<N; j++)
+            {
+            fputs(Onegin[i][j].c_str(), text);
+            }
+        }
+    fclose (text);
+
     for (int i = 0; i < 14; i++)
         {
         for (int j = 0; j < N; j++)
@@ -33,13 +46,12 @@ int main ()
 
 void ReadOnegin(string Onegin[], int j)
     {
-    FILE * text;
-    text = fopen ("Evgeniy-Onegin.txt", "r");
+    FILE * text = fopen ("Evgeniy-Onegin.txt", "r");
     char time[100] = {""};
     for (int k = 0; k < j; k++)
-            {
-            fgets (time, 100, text);
-            }
+        {
+        fgets (time, 100, text);
+        }
     for (int i = 0; i<N; i++)
         {
         fgets (time, 100, text);
